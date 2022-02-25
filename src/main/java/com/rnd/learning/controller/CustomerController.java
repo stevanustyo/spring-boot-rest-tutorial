@@ -59,6 +59,7 @@ public class CustomerController {
     public ResponseEntity<Object> findOccupation(@RequestParam String occupation) {
         // code here
         // test commit
+        // pandji commit
         return null;
     }
 
