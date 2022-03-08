@@ -2,7 +2,6 @@ package com.rnd.learning.domain;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import net.bytebuddy.implementation.bind.annotation.Super;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;

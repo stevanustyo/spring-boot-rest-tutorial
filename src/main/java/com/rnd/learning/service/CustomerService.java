@@ -62,8 +62,12 @@ public class CustomerService {
         return customerRepository.findByCustomerAddress(address);
     }
 
-    public Customer deleteAllCustomer(Customer customer) {
-        return customerRepository.deleteCustomer();
+    public void deleteCustomer(Long id) {
+        var customer = customerRepository.findById(id);
+        if (customer.isPresent()) {
+            var customerToBeDelete = customer.get();
+            customerRepository.delete(customerToBeDelete);
+        }
     }
 
 }

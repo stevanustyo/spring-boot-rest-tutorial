@@ -5,10 +5,8 @@ import com.rnd.learning.domain.Customer;
 import com.rnd.learning.domain.CustomerResponseDto;
 import com.rnd.learning.service.CustomerService;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,9 +62,9 @@ public class CustomerController {
     //@PostMapping("/deleteOccupation")
     //public ResponseEntity<Object> deleteOccupation(@DeleteMapping Occ)
 
-    @DeleteMapping("/deleteCustomer/all")
-    public ResponseEntity<Object> deleteCustomerId(@RequestParam Customer customer) {
-        customerService.deleteAllCustomer(customer);
+    @DeleteMapping("/delete")
+    public ResponseEntity<Object> deleteCustomerId(@RequestParam DeleteCustomerRq request) {
+        customerService.deleteCustomer(request.getCustomerId());
         return ResponseEntity.ok(BaseResponse.builder()
                         .message("Success delete data")
                 .build());
@@ -111,4 +109,11 @@ public class CustomerController {
 @NoArgsConstructor
 class FindOccupationRq {
     private String occupation;
+}
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+class DeleteCustomerRq {
+    private Long customerId;
 }
