@@ -63,7 +63,7 @@ public class CustomerController {
     //public ResponseEntity<Object> deleteOccupation(@DeleteMapping Occ)
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Object> deleteCustomerId(@RequestParam DeleteCustomerRq request) {
+    public ResponseEntity<Object> deleteCustomerId(@RequestBody DeleteCustomerRq request) {
         customerService.deleteCustomer(request.getCustomerId());
         return ResponseEntity.ok(BaseResponse.builder()
                         .message("Success delete data")
