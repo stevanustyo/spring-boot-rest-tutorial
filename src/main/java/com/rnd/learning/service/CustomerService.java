@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author Stevanus Prasetyo Dwicahyono
@@ -58,6 +56,14 @@ public class CustomerService {
 
     public void saveCustomer(Customer customer) {
         customerRepository.save(customer);
+    }
+
+    public Customer getCustomerByAdress(String address) {
+        return customerRepository.findByCustomerAddress(address);
+    }
+
+    public Customer deleteAllCustomer(Customer customer) {
+        return customerRepository.deleteCustomer();
     }
 
 }
