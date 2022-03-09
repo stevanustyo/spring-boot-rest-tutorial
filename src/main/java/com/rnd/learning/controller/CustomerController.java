@@ -7,6 +7,7 @@ import com.rnd.learning.service.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,9 +60,6 @@ public class CustomerController {
                 .build());
     }
 
-    //@PostMapping("/deleteOccupation")
-    //public ResponseEntity<Object> deleteOccupation(@DeleteMapping Occ)
-
     @DeleteMapping("/delete")
     public ResponseEntity<Object> deleteCustomerId(@RequestBody DeleteCustomerRq request) {
         customerService.deleteCustomer(request.getCustomerId());
@@ -100,6 +98,21 @@ public class CustomerController {
         return ResponseEntity.ok().body(response);
     }
 
+    //@PostMapping("/post/updateAddress")
+    //public ResponseEntity<Object> updateAddress(@RequestParam Long id, @RequestParam UpdateAddressRq newAddress) {
+    //    String message = "";
+    //    var customer = customerService.getCustomerById(id);
+    //    Address = newAddress;
+    //}
+
+    @PutMapping("/updateCustomer")
+    public void updateCustomer(
+            @PathVariable Long id,
+            @RequestParam(required = false) String address,
+            @RequestParam(required = false) String occupation){
+        customerService.updateCustomer(id, address, occupation);
+    }
+
 
 
 }
@@ -116,4 +129,11 @@ class FindOccupationRq {
 @NoArgsConstructor
 class DeleteCustomerRq {
     private Long customerId;
+}
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+class UpdateAddressRq {
+    private String newAddress;
 }

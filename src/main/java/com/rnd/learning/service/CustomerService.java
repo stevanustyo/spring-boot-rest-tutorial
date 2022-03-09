@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Stevanus Prasetyo Dwicahyono
@@ -69,5 +71,30 @@ public class CustomerService {
             customerRepository.delete(customerToBeDelete);
         }
     }
+
+    //public void updateAddress(Long id, String newAddress) {
+    //    var customer = customerRepository.findById(id);
+    //    if (customer.isPresent()) {
+    //        var address = newAddress;
+    //    }
+    //}
+
+    @Transactional
+    public void updateCustomer(Long id, String address, String occupation) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException());
+
+        if (address != null &&
+                address.length() > 0 &&
+                !Objects.equals(customer.getCustomerAddress(), address)) {
+            customer.setCustomerAddress(address);
+        }
+        if (occupation != null &&
+                occupation.length() > 0 &&
+                !Objects.equals(customer.getCustomerOccupation(), occupation)) {
+            customer.setCustomerOccupation(occupation);
+        }
+    }
+
 
 }
