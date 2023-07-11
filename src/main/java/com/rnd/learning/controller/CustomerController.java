@@ -105,9 +105,9 @@ public class CustomerController {
     //    Address = newAddress;
     //}
 
-    @PutMapping("/updateCustomer")
+    @PutMapping("/updateCustomer/{id}")
     public void updateCustomer(
-            @PathVariable Long id,
+            @PathVariable("id") Long id,
             @RequestParam(required = false) String address,
             @RequestParam(required = false) String occupation){
         customerService.updateCustomer(id, address, occupation);
